@@ -5,7 +5,7 @@ import { Container, Grid } from '@material-ui/core';
 import Title from './Title';
 import PropTypes from 'prop-types';
 import background from '../assets/img/background.png';
-const URL = 'ws://localhost:9000';
+const URL = 'ws://35.239.214.133/:9000';
 
 const styles = theme => ({
 	container: {

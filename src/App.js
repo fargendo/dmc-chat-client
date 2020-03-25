@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
-import './App.css';
+
 import Chat from './components/Chat';
 
 import { makeStyles } from '@material-ui/core/styles';

@@ -8,6 +8,7 @@ const useStyles = makeStyles(theme => ({
 	gridItem: {
 		width: '100%',
 		color: '#ffffff',
+		fontSize: '20px',
 	},
 	divider: {
 		backgroundColor: '#808080',
@@ -17,12 +18,9 @@ const useStyles = makeStyles(theme => ({
 const ChatMessage = ({ name, message }) => {
 	const classes = useStyles();
 	return (
-		<div>
-			<Typography className={classes.gridItem}>
-				{name} {message}
-			</Typography>
-			<Divider className={classes.divider} />
-		</div>
+		<Typography className={classes.gridItem}>
+			{name} {message}
+		</Typography>
 	);
 };
 

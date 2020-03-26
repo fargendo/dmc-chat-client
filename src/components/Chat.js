@@ -9,25 +9,24 @@ const URL = 'ws://35.239.214.133:9000';
 
 const styles = theme => ({
 	container: {
-		maxWidth: '50%',
-		height: '40vh',
+		width: '60%',
+		height: '50vh',
 		marginLeft: 'auto',
 		marginRight: 'auto',
-		border: '2px solid black',
+		// border: '2px solid black',
 		position: 'relative',
 		overflow: 'auto',
 		backgroundColor: '#000000',
 		borderRadius: '15px',
 		opacity: '.7',
-		margin: '25px',
+		margin: '27px',
+		paddingTop: '20px',
+		wordWrap: 'break-word',
 	},
-	gridItem: {
-		overflowY: 'scroll',
-	},
-
 	root: {
 		backgroundImage: `url(${background})`,
-		backgroundSize: 'auto',
+		backgroundSize: 'cover',
+		width: 'auto',
 		height: '100vh',
 	},
 });
@@ -42,7 +41,7 @@ class Chat extends Component {
 	componentDidMount() {
 		this.ws.onopen = () => {
 			// on connecting, do nothing but log it to the console
-			console.log('connected');
+			console.log('Connected to chat.');
 		};
 
 		this.ws.onmessage = evt => {
@@ -53,7 +52,7 @@ class Chat extends Component {
 		};
 
 		this.ws.onclose = () => {
-			console.log('disconnected');
+			console.log('Disconnect from chat.');
 			// automatically try to reconnect on connection loss
 			this.setState({
 				ws: new WebSocket(URL),
@@ -86,7 +85,7 @@ class Chat extends Component {
 		const { classes } = this.props;
 		return (
 			<div className={classes.root}>
-				<Title className={classes.title} />
+				<Title />
 				<Container className={classes.container}>
 					{reversedMessages.map((message, index) => (
 						<ChatMessage
@@ -95,12 +94,13 @@ class Chat extends Component {
 							name={message.name}
 						/>
 					))}
+
 					<div
 						style={{ float: 'left', clear: 'both' }}
 						ref={el => {
 							this.messagesEnd = el;
 						}}
-					></div>
+					/>
 				</Container>
 			</div>
 		);

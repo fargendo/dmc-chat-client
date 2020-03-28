@@ -5,7 +5,6 @@ import { Container, Typography } from '@material-ui/core';
 import Title from './Title';
 import PropTypes from 'prop-types';
 import background from '../assets/img/background.png';
-import ParseMessage from '../parsers/ParseMessage';
 const URL = 'ws://35.239.214.133:9000';
 
 const styles = theme => ({
@@ -75,7 +74,6 @@ class Chat extends Component {
 	};
 	//Send incoming message to parser
 	parseIncomingMessage = message => {
-		console.log(message.name);
 		if (message.name == '[From') {
 			message = null;
 		} else if (message.name == '[!]') {
@@ -90,16 +88,7 @@ class Chat extends Component {
 		const reversedMessages = this.state.messages.reverse();
 		if (this.state.messages.length > numberOfMessages) {
 			this.state.messages.shift();
-			console.log(this.state.messages);
 		}
-		//TODO populate array and add new messages to end
-
-		// else {
-		// 	for (let i = numberOfMessages; i > 0; i--) {
-		// 		this.state.messages.fill('', 0, i - 1);
-		// 		console.log(this.state.messages);
-		// 	}
-		// }
 		const { classes } = this.props;
 		return (
 			<div className={classes.root}>

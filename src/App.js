@@ -1,9 +1,5 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-
+import React from 'react';
 import Chat from './components/Chat';
-
-import { makeStyles } from '@material-ui/core/styles';
 
 const App = () => {
 	return <Chat />;

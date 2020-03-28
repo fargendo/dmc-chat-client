@@ -1,10 +1,11 @@
 import React, { Component, useState, useEffect } from 'react';
 import ChatMessage from './ChatMessage';
 import { withStyles } from '@material-ui/styles';
-import { Container, Grid } from '@material-ui/core';
+import { Container, Typography } from '@material-ui/core';
 import Title from './Title';
 import PropTypes from 'prop-types';
 import background from '../assets/img/background.png';
+import ParseMessage from '../parsers/ParseMessage';
 const URL = 'ws://35.239.214.133:9000';
 
 const styles = theme => ({
@@ -29,6 +30,11 @@ const styles = theme => ({
 		width: 'auto',
 		height: '100vh',
 	},
+	noMessages: {
+		width: '100%',
+		color: '#ffffff',
+		fontSize: '20px',
+	},
 });
 
 class Chat extends Component {
@@ -47,7 +53,8 @@ class Chat extends Component {
 		this.ws.onmessage = evt => {
 			// on receiving a message, add it to the list of messages
 			const message = JSON.parse(evt.data);
-			this.addMessage(message);
+			// this.addMessage(message);
+			this.parseIncomingMessage(message);
 			this.scrollToBottom();
 		};
 
@@ -65,6 +72,17 @@ class Chat extends Component {
 
 	scrollToBottom = () => {
 		this.messagesEnd.scrollIntoView({ behavior: 'smooth' });
+	};
+	//Send incoming message to parser
+	parseIncomingMessage = message => {
+		console.log(message.name);
+		if (message.name == '[From') {
+			message = null;
+		} else if (message.name == '[!]') {
+			message = null;
+		} else {
+			this.addMessage(message);
+		}
 	};
 
 	render() {
@@ -87,14 +105,19 @@ class Chat extends Component {
 			<div className={classes.root}>
 				<Title />
 				<Container className={classes.container}>
-					{reversedMessages.map((message, index) => (
-						<ChatMessage
-							key={index}
-							message={message.message}
-							name={message.name}
-						/>
-					))}
-
+					{this.state.messages.length ? (
+						reversedMessages.map((message, index) => (
+							<ChatMessage
+								key={index}
+								message={message.message}
+								name={message.name}
+							/>
+						))
+					) : (
+						<Typography className={classes.noMessages}>
+							No messages yet...
+						</Typography>
+					)}
 					<div
 						style={{ float: 'left', clear: 'both' }}
 						ref={el => {

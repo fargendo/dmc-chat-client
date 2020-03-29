@@ -6,7 +6,7 @@ import Title from './Title';
 import PropTypes from 'prop-types';
 import background from '../assets/img/background.png';
 // import PollAPI from './PollAPI';
-const URL = 'ws://35.239.214.133:9000';
+const URL = 'wss://35.239.214.133:9000';
 
 const styles = theme => ({
 	container: {

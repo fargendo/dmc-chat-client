@@ -5,6 +5,7 @@ import { Container, Typography } from '@material-ui/core';
 import Title from './Title';
 import PropTypes from 'prop-types';
 import background from '../assets/img/background.png';
+import PollAPI from './PollAPI';
 const URL = 'ws://35.239.214.133:9000';
 
 const styles = theme => ({
@@ -26,8 +27,8 @@ const styles = theme => ({
 	root: {
 		backgroundImage: `url(${background})`,
 		backgroundSize: 'cover',
-		width: 'auto',
-		height: '100vh',
+		// width: 'auto',
+		height: '100%',
 	},
 	noMessages: {
 		width: '100%',
@@ -93,6 +94,7 @@ class Chat extends Component {
 		return (
 			<div className={classes.root}>
 				<Title />
+				<PollAPI />
 				<Container className={classes.container}>
 					{this.state.messages.length ? (
 						reversedMessages.map((message, index) => (

@@ -10,6 +10,7 @@
 		"mc-server-status": "^1.2.0",
 		"react": "^16.13.1",
 		"react-dom": "^16.13.1",
+		"react-polling": "^1.0.5",
 		"react-scripts": "3.4.1"
 	},
 	"scripts": {

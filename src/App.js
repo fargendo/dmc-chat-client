@@ -1,5 +1,6 @@
 import React from 'react';
 import Chat from './components/Chat';
+
 import background from './assets/img/background.png';
 import { makeStyles } from '@material-ui/core/styles';
 

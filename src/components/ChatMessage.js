@@ -9,6 +9,7 @@ const useStyles = makeStyles(theme => ({
 		width: '100%',
 		color: '#ffffff',
 		fontSize: '20px',
+		paddingLeft: '20px',
 	},
 	divider: {
 		backgroundColor: '#808080',

@@ -51,7 +51,6 @@ class Chat extends Component {
 		messages: [],
 		players: [],
 		tps: '',
-		uptime: '',
 		worldSize: '',
 	};
 
@@ -86,25 +85,18 @@ class Chat extends Component {
 
 	//Send incoming message to parser
 	parseIncomingMessage = message => {
-		if (message.name == '[From') {
-			message = null;
-		} else if (message.name == '[!]') {
-			message = null;
-		} else {
-			this.addMessage(message);
-		}
-	};
-
-	addMessage = message => {
-		//Check if message from in game or node server poll
 		if (!message.players) {
-			this.setState(state => ({ messages: [message, ...state.messages] }));
+			if (message.name == '[From') {
+				message = null;
+			} else if (message.name == '[!]') {
+				message = null;
+			} else {
+				this.setState(state => ({ messages: [message, ...state.messages] }));
+			}
 		} else {
 			this.setState({ players: message.players });
 			this.setState({ tps: message.tps });
-			// this.setState({ uptime: message.uptime });
 			this.setState({ worldSize: message.worldSize });
-			// console.log(message.players);
 		}
 	};
 
@@ -122,7 +114,6 @@ class Chat extends Component {
 						<InfoDrawer
 							players={this.state.players}
 							tps={this.state.tps}
-							// uptime={this.state.uptime}
 							worldSize={this.state.worldSize}
 						/>
 					</Grid>

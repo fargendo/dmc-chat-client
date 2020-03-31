@@ -67,9 +67,7 @@ const useStyles = makeStyles(theme => ({
 
 const InfoDrawer = props => {
 	const { players, tps, uptime, worldSize } = props;
-	// console.log(players);
-	// console.log(players.length);
-	const [open, setOpen] = React.useState(true);
+	const [open, setOpen] = React.useState(false);
 	const theme = useTheme();
 	const classes = useStyles();
 	const handleDrawerOpen = () => {
@@ -137,18 +135,25 @@ const InfoDrawer = props => {
 						<ListItemText primary={'Uptime: ' + uptime} />
 					</ListItem> */}
 					<ListItem>
-						<ListItemText primary={'TPS: ' + tps} />
+						<ListItemText primary={tps ? 'TPS: ' + tps : 'TPS: Loading...'} />
 					</ListItem>
 					<ListItem>
-						<ListItemText primary={'World Size: ' + worldSize} />
+						<ListItemText
+							primary={
+								worldSize
+									? 'World Size: ' + worldSize
+									: 'World Size: Loading...'
+							}
+						/>
 					</ListItem>
 				</List>
 				<Divider />
 				<List>
-					{/* <ListItem>
-						<ListItemText primary='Player List' />
-					</ListItem> */}
-
+					<ListItem>
+						<ListItemText
+							primary={players.length ? 'Player List' : 'Loading Players...'}
+						/>
+					</ListItem>
 					{loopPlayers}
 				</List>
 			</Drawer>

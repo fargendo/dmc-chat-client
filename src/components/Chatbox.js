@@ -24,6 +24,7 @@ const useStyles = makeStyles(() => ({
 		opacity: '.7',
 		wordWrap: 'break-word',
 		paddingTop: '20px',
+		paddingBottom: '20px',
 	},
 	noMessages: {
 		width: '100%',

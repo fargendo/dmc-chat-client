@@ -72,19 +72,18 @@ const useStyles = makeStyles((theme) => ({
 		padding: theme.spacing(3),
 	},
 	titles: {
-		fontSize: '18px',
 		color: '#ffffff',
-
-		opacity: '1',
-	},
-	icon: {
-		opacity: '1',
 	},
 	iconButton: {
 		color: '#ffffff',
 	},
 	divider: {
 		backgroundColor: '#ffffff',
+	},
+	info: {
+		// textAlign: 'center',
+		color: '#ffffff',
+		fontSize: '20px',
 	},
 }));
 
@@ -124,7 +123,7 @@ export const InfoDrawer = (props) => {
 	const playerList = players.map((player, i) => (
 		<ListItem key={i}>
 			<ListItemIcon>
-				<img className={classes.icon} src={icons[i]} alt='player head link' />
+				<img src={icons[i]} alt='player head link' />
 			</ListItemIcon>
 			<ListItemText className={classes.titles} primary={player} />
 			<Divider className={classes.divider} />
@@ -178,6 +177,13 @@ export const InfoDrawer = (props) => {
 				<List>
 					<ListItem>
 						<ListItemText
+							className={classes.info}
+							disableTypography
+							primary={'Server Info'}
+						/>
+					</ListItem>
+					<ListItem>
+						<ListItemText
 							className={classes.titles}
 							disableTypography
 							primary={tps ? 'TPS: ' + tps : 'TPS: Loading...'}
@@ -199,7 +205,7 @@ export const InfoDrawer = (props) => {
 				<List>
 					<ListItem>
 						<ListItemText
-							className={classes.titles}
+							className={classes.info}
 							disableTypography
 							primary={
 								players.length

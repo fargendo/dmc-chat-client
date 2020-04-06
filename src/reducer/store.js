@@ -2,19 +2,19 @@ import { createStore } from 'redux';
 import { reducer } from './index';
 
 export const INITIAL_STATE = {
-	messages: [''],
+	messages: [],
 	players: [],
 	icons: [],
 	tps: '',
 	worldSize: '',
-	open: false,
+	open: true,
 };
 
 export const buildStore = () => {
 	const store = createStore(
 		reducer,
-		INITIAL_STATE,
-		window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+		INITIAL_STATE
+		// window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 	);
 	return store;
 };

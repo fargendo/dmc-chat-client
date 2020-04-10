@@ -8,7 +8,7 @@ import {
 	updateWorldSizeAction,
 } from './actions';
 import Chatbox from '../../components/Chatbox';
-import { ConnectedInfoDrawer } from '../DrawerContainer/InfoDrawer';
+import { ConnectedDrawerContainer } from '../DrawerContainer/DrawerContainer';
 import { Grid } from '@material-ui/core';
 
 const URL = 'ws://35.239.214.133:9000';
@@ -62,7 +62,7 @@ export class ChatContainer extends Component {
 			<div>
 				<Grid container>
 					<Grid item md={2} lg={3} xl={3}>
-						<ConnectedInfoDrawer />
+						<ConnectedDrawerContainer />
 					</Grid>
 					<Grid item xs={12} sm={12} md={8} lg={6}>
 						<Chatbox />

@@ -7,6 +7,8 @@ const useStyles = makeStyles((theme) => ({
 		paddingBottom: '30px',
 	},
 	title: {
+		// color: '#ffffff',
+		color: '#000000',
 		textAlign: 'center',
 
 		fontWeight: '800',
@@ -17,10 +19,15 @@ const useStyles = makeStyles((theme) => ({
 			fontSize: '50px',
 		},
 		[theme.breakpoints.down('sm')]: {
+			fontSize: '42px',
+		},
+		[theme.breakpoints.down('xs')]: {
 			fontSize: '35px',
 		},
 	},
 	description: {
+		// color: '#ffffff',
+		color: '#000000',
 		textAlign: 'center',
 		[theme.breakpoints.up('lg')]: {
 			fontSize: '35px',
@@ -29,7 +36,10 @@ const useStyles = makeStyles((theme) => ({
 			fontSize: '25px',
 		},
 		[theme.breakpoints.down('sm')]: {
-			fontSize: '17px',
+			fontSize: '20px',
+		},
+		[theme.breakpoints.down('xs')]: {
+			fontSize: '16px',
 		},
 	},
 }));

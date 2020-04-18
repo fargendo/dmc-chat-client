@@ -68,14 +68,13 @@ const Chatbox = (props) => {
 		<div className={classes.root}>
 			<Title className={classes.title} />
 			<Container spacing={8} className={classes.container}>
-				{
-					messages.length &&
-						messages.map((message, index) => (
-							<ChatMessage key={index} message={message} />
-						))
-					// : fetchChat()
-					// <ChatMessage message={'No messages yet...'} />
-				}
+				{messages.length ? (
+					messages.map((message, index) => (
+						<ChatMessage key={index} message={message} />
+					))
+				) : (
+					<ChatMessage message={'No messages yet...'} />
+				)}
 			</Container>
 		</div>
 	);

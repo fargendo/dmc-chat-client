@@ -4,9 +4,9 @@ import { isMobile } from 'react-device-detect';
 
 import { makeStyles } from '@material-ui/core/styles';
 
-import background from './assets/img/background7.png';
 import { ConnectedChat } from './containers/ChatContainer/ChatContainer';
 import { toggleOpenAction } from './containers/DrawerContainer/actions';
+import background from './assets/img/background7.png';
 
 const useStyles = makeStyles(() => ({
 	root: {

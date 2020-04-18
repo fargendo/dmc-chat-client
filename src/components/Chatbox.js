@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -6,6 +6,8 @@ import { Container } from '@material-ui/core';
 
 import Title from './Title';
 import ChatMessage from './ChatMessage';
+
+import { getMessagesAction } from '../containers/ChatContainer/actions';
 
 const useStyles = makeStyles((theme) => ({
 	root: { marginTop: '10vh' },
@@ -42,19 +44,38 @@ const useStyles = makeStyles((theme) => ({
 const Chatbox = (props) => {
 	const classes = useStyles();
 	const { messages } = props;
-	const msgs = messages;
+
+	// const msgs = messages;
+	const URL = 'http://35.239.214.133:9000/api/getLast15Messages';
+
+	useEffect(() => {
+		let lastMessages = [];
+		if (!messages.length) {
+			console.log('Fetching messages from DB');
+			fetch(URL)
+				.then((response) => response.json())
+				.then((data) => {
+					data.forEach((message) => {
+						props.getMessages(message.message);
+					});
+				})
+
+				.catch((err) => console.log(err));
+		}
+	}, [messages]);
 
 	return (
 		<div className={classes.root}>
 			<Title className={classes.title} />
 			<Container spacing={8} className={classes.container}>
-				{messages.length ? (
-					msgs.map((message, index) => (
-						<ChatMessage key={index} message={message} />
-					))
-				) : (
-					<ChatMessage message={'No messages yet...'} />
-				)}
+				{
+					messages.length &&
+						messages.map((message, index) => (
+							<ChatMessage key={index} message={message} />
+						))
+					// : fetchChat()
+					// <ChatMessage message={'No messages yet...'} />
+				}
 			</Container>
 		</div>
 	);
@@ -63,5 +84,8 @@ const Chatbox = (props) => {
 const mapStateToProps = ({ messages }) => ({
 	messages,
 });
+const mapDispatchToProps = (dispatch) => ({
+	getMessages: (message) => dispatch(getMessagesAction(message)),
+});
 
-export default connect(mapStateToProps, null)(Chatbox);
+export default connect(mapStateToProps, mapDispatchToProps)(Chatbox);

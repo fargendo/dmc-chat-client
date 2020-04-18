@@ -1,4 +1,7 @@
 import React from 'react';
+import { connect } from 'react-redux';
+
+import { makeStyles, useTheme } from '@material-ui/core/styles';
 import {
 	Drawer,
 	IconButton,
@@ -8,10 +11,8 @@ import {
 	Divider,
 	ListItemIcon,
 } from '@material-ui/core';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import { connect } from 'react-redux';
 
 import {
 	toggleOpenAction,
@@ -90,6 +91,7 @@ const InfoDrawer = (props) => {
 			anchor='left'
 			open={props.open}
 			classes={{ paper: classes.default }}
+			ModalProps={{ onBackdropClick: handleDrawerClose }}
 		>
 			<div className={classes.drawerHeader}>
 				<IconButton className={classes.iconButton} onClick={handleDrawerClose}>

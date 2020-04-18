@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+
+import { Grid } from '@material-ui/core';
+
 import {
 	addMessageAction,
 	updatePlayersAction,
@@ -9,7 +12,6 @@ import {
 } from './actions';
 import Chatbox from '../../components/Chatbox';
 import { ConnectedDrawerContainer } from '../DrawerContainer/DrawerContainer';
-import { Grid } from '@material-ui/core';
 
 const URL = 'ws://35.239.214.133:9000';
 

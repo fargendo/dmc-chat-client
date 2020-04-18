@@ -12,6 +12,16 @@ export const reducer = (state = INITIAL_STATE, action) => {
 				messages: [...newState.messages, action.payload],
 			};
 			break;
+		case 'GET_MESSAGES':
+			//limit maximum number of messages in state (15)
+			if (state.messages.length >= 15) state.messages.shift();
+			// state.messages.reverse();
+
+			newState = {
+				...state,
+				messages: [action.payload, ...newState.messages],
+			};
+			break;
 
 		case 'UPDATE_PLAYERS':
 			newState = {

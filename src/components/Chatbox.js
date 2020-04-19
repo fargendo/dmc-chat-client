@@ -47,7 +47,7 @@ const Chatbox = (props) => {
 	const { messages } = props;
 
 	// const msgs = messages;
-	const URL = 'https://35.239.214.133:9000/api/getLast15Messages';
+	const URL = 'https://dmcchat.com:9000/api/getLast15Messages';
 
 	useEffect(() => {
 		let lastMessages = [];

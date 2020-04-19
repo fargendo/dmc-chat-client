@@ -21,7 +21,9 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-const ChatMessage = ({ message }) => {
+const ChatMessage = (props) => {
+	const { message } = props;
+
 	const classes = useStyles();
 	return <Typography className={classes.gridItem}>{message}</Typography>;
 };

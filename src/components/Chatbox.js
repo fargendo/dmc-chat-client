@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
+import { animateScroll } from 'react-scroll';
 
 import { makeStyles } from '@material-ui/core/styles';
 import { Container } from '@material-ui/core';
@@ -64,6 +65,10 @@ const Chatbox = (props) => {
 		}
 	}, [messages]);
 
+	const scrollToBottom = () => {
+		animateScroll.scrollToBottom();
+	};
+
 	return (
 		<div className={classes.root}>
 			<Title className={classes.title} />
@@ -75,6 +80,7 @@ const Chatbox = (props) => {
 				) : (
 					<ChatMessage message={'No messages yet...'} />
 				)}
+				{scrollToBottom()}
 			</Container>
 		</div>
 	);

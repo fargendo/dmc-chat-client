@@ -13,7 +13,7 @@ import {
 import Chatbox from '../../components/Chatbox';
 import { ConnectedDrawerContainer } from '../DrawerContainer/DrawerContainer';
 
-const URL = 'wss://35.239.214.133:9000';
+const URL = 'wss://dmcchat.com:9000';
 
 export class ChatContainer extends Component {
 	ws = new WebSocket(URL);

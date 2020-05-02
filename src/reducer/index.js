@@ -11,6 +11,15 @@ export const reducer = (state = INITIAL_STATE, action) => {
 				...state,
 				messages: [...newState.messages, action.payload],
 			};
+
+			break;
+		case 'ADD_NAME':
+			if (state.names.length >= 15) state.names.shift();
+
+			newState = {
+				...state,
+				names: [...newState.names, action.payload],
+			};
 			break;
 		case 'GET_MESSAGES':
 			//limit maximum number of messages in state (15)
@@ -20,6 +29,16 @@ export const reducer = (state = INITIAL_STATE, action) => {
 			newState = {
 				...state,
 				messages: [action.payload, ...newState.messages],
+			};
+			break;
+		case 'GET_NAMES':
+			//limit maximum number of messages in state (15)
+			if (state.names.length >= 15) state.names.shift();
+			// state.messages.reverse();
+
+			newState = {
+				...state,
+				names: [action.payload, ...newState.names],
 			};
 			break;
 
@@ -55,7 +74,48 @@ export const reducer = (state = INITIAL_STATE, action) => {
 				icons: action.payload,
 			};
 			break;
+		case 'SET_UUID':
+			newState = {
+				...state,
+				playerUUID: action.payload,
+			};
+			break;
+		case 'SET_MESSAGE_COLORS':
+			if (state.messageColor.length >= 15) state.messageColor.shift();
 
+			newState = {
+				...state,
+				messageColor: [...newState.messageColor, action.payload],
+			};
+			break;
+		case 'SET_NAME_COLOR':
+			if (state.nameColor.length >= 15) state.nameColor.shift();
+
+			newState = {
+				...state,
+				nameColor: [...newState.nameColor, action.payload],
+			};
+			break;
+		case 'GET_NAME_COLOR':
+			//limit maximum number of messages in state (15)
+			if (state.nameColor.length >= 15) state.nameColor.shift();
+			// state.messages.reverse();
+
+			newState = {
+				...state,
+				nameColor: [action.payload, ...newState.nameColor],
+			};
+			break;
+		case 'GET_MESSAGE_COLOR':
+			//limit maximum number of messages in state (15)
+			if (state.messageColor.length >= 15) state.messageColor.shift();
+			// state.messages.reverse();
+
+			newState = {
+				...state,
+				messageColor: [action.payload, ...newState.messageColor],
+			};
+			break;
 		default:
 			break;
 	}

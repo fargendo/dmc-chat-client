@@ -4,13 +4,14 @@ import { connect } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 
 import InfoDrawer from '../../components/InfoDrawer';
-import { toggleOpenAction, updatePlayerIcon } from './actions';
+import { toggleOpenAction, updatePlayerIcon, setUUID } from './actions';
 import {
 	updatePlayersAction,
 	updateTPSAction,
 	updateWorldSizeAction,
 } from '../ChatContainer/actions';
 import Menu from '../../components/Menu';
+import getUUID from '../../js/getUUID';
 
 const useStyles = makeStyles(() => ({
 	root: {
@@ -24,6 +25,7 @@ export const DrawerContainer = (props) => {
 
 	useEffect(() => {
 		let playerIconArray = [];
+
 		if (!players.length) {
 			console.log('fetching info');
 			fetch('https://destroymc.net/status')
@@ -73,6 +75,7 @@ const mapDispatchtoProps = (dispatch) => ({
 	updateTps: (tps) => dispatch(updateTPSAction(tps)),
 	updateWorldSize: (worldSize) => dispatch(updateWorldSizeAction(worldSize)),
 	updatePlayerIcon: (icons) => dispatch(updatePlayerIcon(icons)),
+	setPlayerUUID: (uuid) => dispatch(setUUID(uuid)),
 });
 
 export const ConnectedDrawerContainer = connect(

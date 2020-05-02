@@ -9,9 +9,15 @@ import {
 	updatePlayersAction,
 	updateTPSAction,
 	updateWorldSizeAction,
+	setMessageColorAction,
+	setNameColorAction,
+	addNameAction,
+	getNameAction,
 } from './actions';
 import Chatbox from '../../components/Chatbox';
 import { ConnectedDrawerContainer } from '../DrawerContainer/DrawerContainer';
+import parseData from '../../parsers/parseData';
+import { getNameColor, getMessageColor } from './../../parsers/getChatColor';
 
 const URL = 'wss://dmcchat.com:9000';
 
@@ -25,11 +31,25 @@ export class ChatContainer extends Component {
 		};
 
 		this.ws.onmessage = (evt) => {
-			const message = JSON.parse(evt.data);
+			const data = JSON.parse(evt.data);
 
-			this.parseIncomingMessage(message);
+			if (!data.players) {
+				const parsedMessage = parseData(data);
 
-			// console.log(this.state.players);
+				const nameColor = getNameColor(data);
+				const chatColor = getMessageColor(data);
+
+				if (parsedMessage) {
+					this.props.addName(parsedMessage.name);
+					this.props.addMessages(parsedMessage.message);
+					this.props.setNameColor(nameColor);
+					this.props.setMsgColor(chatColor);
+				}
+			} else {
+				this.props.updatePlayers(data.players);
+				this.props.updateTps(data.tps);
+				this.props.updateWorldSize(data.worldSize);
+			}
 		};
 
 		this.ws.onclose = () => {
@@ -40,24 +60,6 @@ export class ChatContainer extends Component {
 			});
 		};
 	}
-
-	//Send incoming message to parser
-	parseIncomingMessage = (message) => {
-		if (!message.players) {
-			if (message.name === '[From') {
-				message = null;
-			} else if (message.name === '[!]') {
-				message = null;
-			} else {
-				const newMessage = message.name + ' ' + message.message;
-				this.props.addMessages(newMessage);
-			}
-		} else {
-			this.props.updatePlayers(message.players);
-			this.props.updateTps(message.tps);
-			this.props.updateWorldSize(message.worldSize);
-		}
-	};
 
 	render() {
 		return (
@@ -94,6 +96,9 @@ const mapDispatchToProps = (dispatch) => ({
 	updatePlayers: (players) => dispatch(updatePlayersAction(players)),
 	updateTps: (tps) => dispatch(updateTPSAction(tps)),
 	updateWorldSize: (worldSize) => dispatch(updateWorldSizeAction(worldSize)),
+	setMsgColor: (color) => dispatch(setMessageColorAction(color)),
+	addName: (name) => dispatch(addNameAction(name)),
+	setNameColor: (color) => dispatch(setNameColorAction(color)),
 });
 
 export const ConnectedChat = connect(

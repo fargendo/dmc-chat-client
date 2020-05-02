@@ -2,12 +2,16 @@ import { createStore } from 'redux';
 import { reducer } from './index';
 
 export const INITIAL_STATE = {
+	names: [],
 	messages: [],
+	nameColor: [],
+	messageColor: [],
 	players: [],
 	icons: [],
 	tps: '',
 	worldSize: '',
 	open: true,
+	playerUUID: [],
 };
 
 export const buildStore = () => {

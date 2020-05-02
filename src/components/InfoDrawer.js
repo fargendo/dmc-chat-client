@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-
+import { PropTypes } from 'prop-types';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import {
 	Drawer,
@@ -10,6 +10,7 @@ import {
 	ListItemText,
 	Divider,
 	ListItemIcon,
+	Link,
 } from '@material-ui/core';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
@@ -23,6 +24,7 @@ import {
 	updateTPSAction,
 	updateWorldSizeAction,
 } from '../containers/ChatContainer/actions';
+import Player from './Player';
 
 const drawerWidth = 240;
 
@@ -68,6 +70,10 @@ const useStyles = makeStyles((theme) => ({
 
 const InfoDrawer = (props) => {
 	const { players, tps, worldSize, icons } = props;
+
+	// console.log(icons);
+	// console.log(playerUUID.length);
+	// console.log(typeof playerUUID);
 	const theme = useTheme();
 	const classes = useStyles();
 
@@ -76,7 +82,8 @@ const InfoDrawer = (props) => {
 	};
 
 	const playerList = players.map((player, i) => (
-		<ListItem key={i}>
+		// <Player player={player} key={i} />
+		<ListItem button key={i}>
 			<ListItemIcon>
 				<img src={icons[i]} alt='player head link' />
 			</ListItemIcon>
@@ -138,7 +145,7 @@ const InfoDrawer = (props) => {
 						primary={
 							players.length
 								? 'Players Online: ' + players.length
-								: 'Loading Players...'
+								: 'Server is dead.'
 						}
 					/>
 				</ListItem>
@@ -148,6 +155,10 @@ const InfoDrawer = (props) => {
 	);
 };
 
+InfoDrawer.propTypes = {
+	playerUUID: PropTypes.array.isRequired,
+};
+
 const mapStateToProps = ({
 	players,
 	tps,
@@ -155,6 +166,7 @@ const mapStateToProps = ({
 	open,
 	icons,
 	drawerColor,
+	playerUUID,
 }) => ({
 	players,
 	tps,
@@ -162,6 +174,7 @@ const mapStateToProps = ({
 	open,
 	icons,
 	drawerColor,
+	playerUUID,
 });
 
 const mapDispatchtoProps = (dispatch) => ({

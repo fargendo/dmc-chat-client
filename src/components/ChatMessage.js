@@ -1,13 +1,13 @@
-import React from 'react';
+import React from 'react'
 
-import { makeStyles } from '@material-ui/core/styles';
-import { Typography } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles'
+import { Typography } from '@material-ui/core'
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
 	root: {
 		paddingLeft: '20px',
 	},
-	name: (props) => ({
+	name: props => ({
 		width: '100%',
 		color: props.nameColor,
 		fontSize: '20px',
@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
 		},
 	}),
 
-	gridItem: (props) => ({
+	gridItem: props => ({
 		width: '100%',
 		color: props.messageColor,
 		fontSize: '20px',
@@ -37,11 +37,12 @@ const useStyles = makeStyles((theme) => ({
 			fontSize: '15px',
 		},
 	}),
-}));
+}))
 
-const ChatMessage = (props) => {
-	const { message, name } = props;
-	const classes = useStyles(props);
+const ChatMessage = props => {
+	console.log()
+	const { message, name } = props
+	const classes = useStyles(props)
 
 	return (
 		<div className={classes.root}>
@@ -52,7 +53,7 @@ const ChatMessage = (props) => {
 				{message}
 			</Typography>
 		</div>
-	);
-};
+	)
+}
 
-export default ChatMessage;
+export default ChatMessage

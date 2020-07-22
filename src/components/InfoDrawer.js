@@ -1,7 +1,7 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { PropTypes } from 'prop-types';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
+import React from 'react'
+import { connect } from 'react-redux'
+import { PropTypes } from 'prop-types'
+import { makeStyles, useTheme } from '@material-ui/core/styles'
 import {
 	Drawer,
 	IconButton,
@@ -11,24 +11,24 @@ import {
 	Divider,
 	ListItemIcon,
 	Link,
-} from '@material-ui/core';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+} from '@material-ui/core'
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
+import ChevronRightIcon from '@material-ui/icons/ChevronRight'
 
 import {
 	toggleOpenAction,
 	updatePlayerIcon,
-} from '../containers/DrawerContainer/actions';
+} from '../containers/DrawerContainer/actions'
 import {
 	updatePlayersAction,
 	updateTPSAction,
 	updateWorldSizeAction,
-} from '../containers/ChatContainer/actions';
-import Player from './Player';
+} from '../containers/ChatContainer/actions'
+import Player from './Player'
 
-const drawerWidth = 240;
+const drawerWidth = 240
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
 	drawer: {
 		width: drawerWidth,
 		flexShrink: 0,
@@ -66,20 +66,23 @@ const useStyles = makeStyles((theme) => ({
 		color: '#ffffff',
 		fontSize: '20px',
 	},
-}));
+}))
 
-const InfoDrawer = (props) => {
-	const { players, tps, worldSize, icons } = props;
+const InfoDrawer = props => {
+	const {
+		players,
+		tps,
+		worldSize,
+		icons,
+		drawerOpen,
+		handleDrawerToggle,
+	} = props
 
 	// console.log(icons);
 	// console.log(playerUUID.length);
 	// console.log(typeof playerUUID);
-	const theme = useTheme();
-	const classes = useStyles();
-
-	const handleDrawerClose = () => {
-		props.toggleOpen(false);
-	};
+	const theme = useTheme()
+	const classes = useStyles()
 
 	const playerList = players.map((player, i) => (
 		// <Player player={player} key={i} />
@@ -90,18 +93,18 @@ const InfoDrawer = (props) => {
 			<ListItemText className={classes.titles} primary={player} />
 			<Divider className={classes.divider} />
 		</ListItem>
-	));
+	))
 
 	return (
 		<Drawer
 			variant='persistent'
 			anchor='left'
-			open={props.open}
+			open={drawerOpen}
 			classes={{ paper: classes.default }}
-			ModalProps={{ onBackdropClick: handleDrawerClose }}
+			ModalProps={{ onBackdropClick: handleDrawerToggle }}
 		>
 			<div className={classes.drawerHeader}>
-				<IconButton className={classes.iconButton} onClick={handleDrawerClose}>
+				<IconButton className={classes.iconButton} onClick={handleDrawerToggle}>
 					{theme.direction === 'ltr' ? (
 						<ChevronLeftIcon />
 					) : (
@@ -152,18 +155,17 @@ const InfoDrawer = (props) => {
 				{playerList}
 			</List>
 		</Drawer>
-	);
-};
+	)
+}
 
 InfoDrawer.propTypes = {
 	playerUUID: PropTypes.array.isRequired,
-};
+}
 
 const mapStateToProps = ({
 	players,
 	tps,
 	worldSize,
-	open,
 	icons,
 	drawerColor,
 	playerUUID,
@@ -171,18 +173,17 @@ const mapStateToProps = ({
 	players,
 	tps,
 	worldSize,
-	open,
 	icons,
 	drawerColor,
 	playerUUID,
-});
+})
 
-const mapDispatchtoProps = (dispatch) => ({
-	toggleOpen: (bool) => dispatch(toggleOpenAction(bool)),
-	updatePlayers: (players) => dispatch(updatePlayersAction(players)),
-	updateTps: (tps) => dispatch(updateTPSAction(tps)),
-	updateWorldSize: (worldSize) => dispatch(updateWorldSizeAction(worldSize)),
-	updatePlayerIcon: (icons) => dispatch(updatePlayerIcon(icons)),
-});
+const mapDispatchtoProps = dispatch => ({
+	toggleOpen: bool => dispatch(toggleOpenAction(bool)),
+	updatePlayers: players => dispatch(updatePlayersAction(players)),
+	updateTps: tps => dispatch(updateTPSAction(tps)),
+	updateWorldSize: worldSize => dispatch(updateWorldSizeAction(worldSize)),
+	updatePlayerIcon: icons => dispatch(updatePlayerIcon(icons)),
+})
 
-export default connect(mapStateToProps, mapDispatchtoProps)(InfoDrawer);
+export default connect(mapStateToProps, mapDispatchtoProps)(InfoDrawer)

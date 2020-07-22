@@ -1,15 +1,15 @@
-import React from 'react';
-import clsx from 'clsx';
-import { connect } from 'react-redux';
+import React from 'react'
+import clsx from 'clsx'
+import { connect } from 'react-redux'
 
-import { makeStyles } from '@material-ui/core/styles';
-import { CssBaseline, AppBar, Toolbar, IconButton } from '@material-ui/core';
-import MenuIcon from '@material-ui/icons/Menu';
-import { toggleOpenAction } from '../containers/DrawerContainer/actions';
+import { makeStyles } from '@material-ui/core/styles'
+import { CssBaseline, AppBar, Toolbar, IconButton } from '@material-ui/core'
+import MenuIcon from '@material-ui/icons/Menu'
+import { toggleOpenAction } from '../containers/DrawerContainer/actions'
 
-const drawerWidth = 240;
+const drawerWidth = 240
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
 	appBar: {
 		transition: theme.transitions.create(['margin', 'width'], {
 			easing: theme.transitions.easing.sharp,
@@ -35,13 +35,12 @@ const useStyles = makeStyles((theme) => ({
 	hide: {
 		display: 'none',
 	},
-}));
+}))
 
-const Menu = (props) => {
-	const classes = useStyles();
-	const handleDrawerOpen = () => {
-		props.toggleOpen(true);
-	};
+const Menu = props => {
+	const { drawerOpen, handleDrawerOpen } = props
+	const classes = useStyles()
+
 	return (
 		<div>
 			<CssBaseline />
@@ -57,22 +56,22 @@ const Menu = (props) => {
 						aria-label='open drawer'
 						onClick={handleDrawerOpen}
 						edge='start'
-						className={clsx(classes.menuButton, props.open && classes.hide)}
+						className={clsx(classes.menuButton, drawerOpen && classes.hide)}
 					>
 						<MenuIcon />
 					</IconButton>
 				</Toolbar>
 			</AppBar>
 		</div>
-	);
-};
+	)
+}
 
 const mapStateToProps = ({ open }) => ({
 	open,
-});
+})
 
-const mapDispatchToProps = (dispatch) => ({
-	toggleOpen: (bool) => dispatch(toggleOpenAction(bool)),
-});
+const mapDispatchToProps = dispatch => ({
+	toggleOpen: bool => dispatch(toggleOpenAction(bool)),
+})
 
-export default connect(mapStateToProps, mapDispatchToProps)(Menu);
+export default connect(mapStateToProps, mapDispatchToProps)(Menu)
